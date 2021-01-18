@@ -1,0 +1,5 @@
+(function() {var implementors = {};
+implementors["serde_json"] = [{"text":"impl Serialize for Map&lt;String, Value&gt;","synthetic":false,"types":[]},{"text":"impl Serialize for Value","synthetic":false,"types":[]},{"text":"impl Serialize for Number","synthetic":false,"types":[]}];
+implementors["yew"] = [{"text":"impl Serialize for HandlerId","synthetic":false,"types":[]}];
+implementors["yew_router"] = [{"text":"impl&lt;T&gt; Serialize for RouteRequest&lt;T&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: Serialize,&nbsp;</span>","synthetic":false,"types":[]},{"text":"impl&lt;STATE&gt; Serialize for Route&lt;STATE&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;STATE: Serialize,&nbsp;</span>","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

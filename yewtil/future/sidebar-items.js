@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["LinkFuture","Trait that allows you to use `ComponentLink` and `AgentLink` to register futures."]]});

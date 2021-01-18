@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `html_nested` macro in crate `yew`."><meta name="keywords" content="rust, rustlang, rust-lang, html_nested"><title>yew::html_nested - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc macro"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../yew/index.html'><div class='logo-container'><img src='https://static.yew.rs/logo.svg' alt='logo'></div></a><div class="sidebar-elems"><p class="location"><a href="index.html">yew</a></p><script>window.sidebarCurrent = {name: "html_nested", ty: "macro", relpath: ""};</script><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/yew_macro/lib.rs.html#107" title="goto source code">[src]</a></span><span class="in-band">Macro <a href="index.html">yew</a>::<wbr><a class="macro" href="">html_nested</a></span></h1><pre class="rust macro">html_nested!() { /* proc-macro */ }</pre><div class="docblock"><p>This macro is similar to <a href="./macro.html.html"><code>html!</code></a>, but preserves the component type instead
+of wrapping it in <a href="./html/type.Html.html"><code>Html</code></a>.</p>
+<p>That macro is useful when, for example, in a typical implementation of a list
+component (let's assume it's called <code>List</code>).
+In a typical implementation you might find two component types -- <code>List</code> and <code>ListItem</code>.
+Only <code>ListItem</code> components are allowed to be children of List`.</p>
+<p>You can find an example implementation of this in the <a href="https://github.com/yewstack/yew/tree/master/examples/nested_list"><code>nested_list</code></a> example.
+That example shows, how to create static lists with their children.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">html</span>::<span class="ident">ChildrenRenderer</span>;
+<span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">virtual_dom</span>::<span class="ident">VChild</span>;
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Properties</span>)]</span>
+<span class="kw">struct</span> <span class="ident">List</span> {
+  <span class="ident">children</span>: <span class="ident">ChildrenRenderer</span><span class="op">&lt;</span><span class="ident">ListItem</span><span class="op">&gt;</span>,
+}
+<span class="kw">impl</span> <span class="ident">Component</span> <span class="kw">for</span> <span class="ident">List</span> {
+  <span class="kw">type</span> <span class="ident">Properties</span> <span class="op">=</span> <span class="self">Self</span>;
+  <span class="comment">// ...</span>
+}
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
+<span class="kw">struct</span> <span class="ident">ListItem</span>;
+<span class="kw">impl</span> <span class="ident">Component</span> <span class="kw">for</span> <span class="ident">ListItem</span> {
+  <span class="comment">// ...</span>
+}
+
+<span class="comment">// Required for ChildrenRenderer</span>
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">VChild</span><span class="op">&lt;</span><span class="ident">ListItem</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ListItem</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">child</span>: <span class="ident">VChild</span><span class="op">&lt;</span><span class="ident">ListItem</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> { <span class="self">Self</span> }
+}
+
+<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Html</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ListItem</span> {
+  <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Html</span> { <span class="self">self</span>.<span class="ident">view</span>() }
+}
+
+<span class="comment">// You can use `List` with nested `ListItem` components.</span>
+<span class="comment">// Using any other kind of element would result in a compile error.</span>
+<span class="macro">html</span><span class="macro">!</span> {
+  <span class="op">&lt;</span><span class="ident">List</span><span class="op">&gt;</span>
+    <span class="op">&lt;</span><span class="ident">ListItem</span><span class="op">/</span><span class="op">&gt;</span>
+    <span class="op">&lt;</span><span class="ident">ListItem</span><span class="op">/</span><span class="op">&gt;</span>
+    <span class="op">&lt;</span><span class="ident">ListItem</span><span class="op">/</span><span class="op">&gt;</span>
+  <span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
+}
+<span class="comment">// In many cases you might want to create the content dynamically.</span>
+<span class="comment">// To do this, you can use the following code:</span>
+<span class="macro">html</span><span class="macro">!</span> {
+  <span class="op">&lt;</span><span class="ident">List</span><span class="op">&gt;</span>
+    { <span class="kw">for</span> <span class="ident">some_iter</span>.<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="macro">html_nested</span><span class="macro">!</span>{ <span class="op">&lt;</span><span class="ident">ListItem</span><span class="op">/</span><span class="op">&gt;</span> }) }
+  <span class="op">&lt;</span><span class="op">/</span><span class="ident">List</span><span class="op">&gt;</span>
+}</pre></div>
+<p>If you used the <a href="./macro.html.html"><code>html!</code></a> macro instead of <code>html_nested!</code>, the code would
+not compile because we explicitly indicated to the compiler that <code>List</code>
+can only contain elements of type <code>ListItem</code> using <a href="./html/struct.ChildrenRenderer.html"><code>ChildrenRenderer&lt;ListItem&gt;</code></a>,
+while <a href="./macro.html.html"><code>html!</code></a> creates items of type <a href="./html/type.Html.html"><code>Html</code></a>.</p>
+</div></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../";window.currentCrate = "yew";</script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

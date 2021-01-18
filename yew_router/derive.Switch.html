@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `Switch` derive in crate `yew_router`."><meta name="keywords" content="rust, rustlang, rust-lang, Switch"><title>yew_router::Switch - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc derive"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../yew_router/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><div class="sidebar-elems"><p class="location"><a href="index.html">yew_router</a></p><script>window.sidebarCurrent = {name: "Switch", ty: "derive", relpath: ""};</script><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/yew_router_macro/lib.rs.html#80" title="goto source code">[src]</a></span><span class="in-band">Derive Macro <a href="index.html">yew_router</a>::<wbr><a class="derive" href="">Switch</a></span></h1><pre class="rust derive">#[derive(Switch)]
+{
+    // Attributes available to this derive:
+    #[to]
+    #[rest]
+    #[end]
+}</pre><div class="docblock"><p>Implements the <code>Switch</code> trait based on attributes present on the struct or enum variants.</p>
+<p>If deriving an enum, each variant should have a <code>#[to = &quot;&quot;]</code> attribute,
+and if deriving a struct, the struct itself should have a <code>#[to = &quot;&quot;]</code> attribute.</p>
+<p>Inside the <code>&quot;&quot;</code> you should put your <strong>route matcher string</strong>.
+At its simplest, the route matcher string will create your variant/struct if it exactly matches the browser's route.
+If the route in the url bar is <code>http://yoursite.com/some/route</code> and your route matcher string
+for an enum variant is <code>/some/route</code>, then that variant will be created when <code>switch()</code> is called with the route.</p>
+<p>But the route matcher has other capabilities.
+If you want to capture data from the route matcher string, for example, extract an id or user name from the route,
+you can use <code>{field_name}</code> to capture data from the route.
+For example, <code>#[to = &quot;/route/{id}&quot;]</code> will capture the content after &quot;/route/&quot;,
+and if the associated variant is defined as <code>Route{id: usize}</code>, then the string that was captured will be
+transformed into a <code>usize</code>.
+If the conversion fails, then the match won't succeed and the next variant will be tried instead.</p>
+<p>There are also <code>{*:field_name}</code> and <code>{3:field_name}</code> types of capture sections that will capture
+<em>everything</em>, and the next 3 path sections respectively.
+<code>{1:field_name}</code> is the same as <code>{field_name}</code>.</p>
+<p>Tuple-structs and Tuple-enum-variants are also supported.
+If you don't want to specify keys that don't correspond to any specific field,
+<code>{}</code>, <code>{*}</code>, and <code>{4}</code> also denote valid capture sections when used on structs and variants without named fields.
+In datastructures without field names, the captures will be assigned in order - left to right.</p>
+<h1 id="note" class="section-header"><a href="#note">Note</a></h1>
+<p>It should be mentioned that the derived function for matching will try enum variants in order,
+from top to bottom, and that the whole route doesn't need to be matched by the route
+matcher string in order for the match to succeed.
+What is meant by this is that <code>[to = &quot;/&quot;]</code> will match &quot;/&quot;, but also &quot;/anything/else&quot;,
+because as soon as the &quot;/&quot; is satisfied, that is considered a match.</p>
+<p>This can be mitigated by specifying a <code>!</code> at the end of your route to inform the matcher that if
+any characters are left after matching the route matcher string, the match should fail.
+This means that <code>[to = &quot;/!&quot;]</code> will match &quot;/&quot; and <em>only</em> &quot;/&quot;.</p>
+<hr />
+<p>There are other attributes as well.
+<code>#[rest]</code>, <code>#[rest=&quot;field_name&quot;]</code> and <code>#[end]</code> attributes exist as well.
+<code>#[rest]</code> and <code>#[rest=&quot;field_name&quot;]</code> are equivalent to <code>{*}</code> and <code>{*:field_name}</code> respectively.
+<code>#[end]</code> is equivalent to <code>!</code>.
+The <code>#[rest]</code> attributes are good if you just want to delegate the whole matching of a variant to a specific
+wrapped struct or enum that also implements <code>Switch</code>.</p>
+<hr />
+<h1 id="example" class="section-header"><a href="#example">Example</a></h1>
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">yew_router</span>::<span class="ident">Switch</span>;
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Switch</span>, <span class="ident">Clone</span>)]</span>
+<span class="kw">enum</span> <span class="ident">AppRoute</span> {
+    <span class="attribute">#[<span class="ident">to</span> <span class="op">=</span> <span class="string">&quot;/some/simple/route&quot;</span>]</span>
+    <span class="ident">SomeSimpleRoute</span>,
+    <span class="attribute">#[<span class="ident">to</span> <span class="op">=</span> <span class="string">&quot;/capture/{}&quot;</span>]</span>
+    <span class="ident">Capture</span>(<span class="ident">String</span>),
+    <span class="attribute">#[<span class="ident">to</span> <span class="op">=</span> <span class="string">&quot;/named/capture/{name}&quot;</span>]</span>
+    <span class="ident">NamedCapture</span> { <span class="ident">name</span>: <span class="ident">String</span> },
+    <span class="attribute">#[<span class="ident">to</span> <span class="op">=</span> <span class="string">&quot;/convert/{id}&quot;</span>]</span>
+    <span class="ident">Convert</span> { <span class="ident">id</span>: <span class="ident">usize</span> },
+    <span class="attribute">#[<span class="ident">rest</span>]</span> <span class="comment">// shorthand for #[to=&quot;{*}&quot;]</span>
+    <span class="ident">Inner</span>(<span class="ident">InnerRoute</span>),
+}
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Switch</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">to</span> <span class="op">=</span> <span class="string">&quot;/inner/route/{first}/{second}&quot;</span>]</span>
+<span class="kw">struct</span> <span class="ident">InnerRoute</span> {
+    <span class="ident">first</span>: <span class="ident">String</span>,
+    <span class="ident">second</span>: <span class="ident">String</span>,
+}</pre></div>
+<p>Check out the examples directory in the repository to see some more usages of the routing syntax.</p>
+</div></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../";window.currentCrate = "yew_router";</script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

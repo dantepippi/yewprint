@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/git/checkouts/yew-7424ad4d701b481c/db3170f/yew-router-macro/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../yew_router_macro/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<span id="2">  2</span>
+<span id="3">  3</span>
+<span id="4">  4</span>
+<span id="5">  5</span>
+<span id="6">  6</span>
+<span id="7">  7</span>
+<span id="8">  8</span>
+<span id="9">  9</span>
+<span id="10"> 10</span>
+<span id="11"> 11</span>
+<span id="12"> 12</span>
+<span id="13"> 13</span>
+<span id="14"> 14</span>
+<span id="15"> 15</span>
+<span id="16"> 16</span>
+<span id="17"> 17</span>
+<span id="18"> 18</span>
+<span id="19"> 19</span>
+<span id="20"> 20</span>
+<span id="21"> 21</span>
+<span id="22"> 22</span>
+<span id="23"> 23</span>
+<span id="24"> 24</span>
+<span id="25"> 25</span>
+<span id="26"> 26</span>
+<span id="27"> 27</span>
+<span id="28"> 28</span>
+<span id="29"> 29</span>
+<span id="30"> 30</span>
+<span id="31"> 31</span>
+<span id="32"> 32</span>
+<span id="33"> 33</span>
+<span id="34"> 34</span>
+<span id="35"> 35</span>
+<span id="36"> 36</span>
+<span id="37"> 37</span>
+<span id="38"> 38</span>
+<span id="39"> 39</span>
+<span id="40"> 40</span>
+<span id="41"> 41</span>
+<span id="42"> 42</span>
+<span id="43"> 43</span>
+<span id="44"> 44</span>
+<span id="45"> 45</span>
+<span id="46"> 46</span>
+<span id="47"> 47</span>
+<span id="48"> 48</span>
+<span id="49"> 49</span>
+<span id="50"> 50</span>
+<span id="51"> 51</span>
+<span id="52"> 52</span>
+<span id="53"> 53</span>
+<span id="54"> 54</span>
+<span id="55"> 55</span>
+<span id="56"> 56</span>
+<span id="57"> 57</span>
+<span id="58"> 58</span>
+<span id="59"> 59</span>
+<span id="60"> 60</span>
+<span id="61"> 61</span>
+<span id="62"> 62</span>
+<span id="63"> 63</span>
+<span id="64"> 64</span>
+<span id="65"> 65</span>
+<span id="66"> 66</span>
+<span id="67"> 67</span>
+<span id="68"> 68</span>
+<span id="69"> 69</span>
+<span id="70"> 70</span>
+<span id="71"> 71</span>
+<span id="72"> 72</span>
+<span id="73"> 73</span>
+<span id="74"> 74</span>
+<span id="75"> 75</span>
+<span id="76"> 76</span>
+<span id="77"> 77</span>
+<span id="78"> 78</span>
+<span id="79"> 79</span>
+<span id="80"> 80</span>
+<span id="81"> 81</span>
+<span id="82"> 82</span>
+<span id="83"> 83</span>
+<span id="84"> 84</span>
+<span id="85"> 85</span>
+<span id="86"> 86</span>
+<span id="87"> 87</span>
+<span id="88"> 88</span>
+<span id="89"> 89</span>
+<span id="90"> 90</span>
+<span id="91"> 91</span>
+<span id="92"> 92</span>
+<span id="93"> 93</span>
+<span id="94"> 94</span>
+<span id="95"> 95</span>
+<span id="96"> 96</span>
+<span id="97"> 97</span>
+<span id="98"> 98</span>
+<span id="99"> 99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+</pre><div class="example-wrap"><pre class="rust ">
+<span class="kw">use</span> <span class="ident">proc_macro</span>::<span class="ident">TokenStream</span>;
+<span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">parse_macro_input</span>, <span class="ident">DeriveInput</span>};
+
+<span class="kw">mod</span> <span class="ident">switch</span>;
+
+<span class="doccomment">/// Implements the `Switch` trait based on attributes present on the struct or enum variants.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// If deriving an enum, each variant should have a `#[to = &quot;&quot;]` attribute,</span>
+<span class="doccomment">/// and if deriving a struct, the struct itself should have a `#[to = &quot;&quot;]` attribute.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Inside the `&quot;&quot;` you should put your **route matcher string**.</span>
+<span class="doccomment">/// At its simplest, the route matcher string will create your variant/struct if it exactly matches the browser&#39;s route.</span>
+<span class="doccomment">/// If the route in the url bar is `http://yoursite.com/some/route` and your route matcher string</span>
+<span class="doccomment">/// for an enum variant is `/some/route`, then that variant will be created when `switch()` is called with the route.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// But the route matcher has other capabilities.</span>
+<span class="doccomment">/// If you want to capture data from the route matcher string, for example, extract an id or user name from the route,</span>
+<span class="doccomment">/// you can use `{field_name}` to capture data from the route.</span>
+<span class="doccomment">/// For example, `#[to = &quot;/route/{id}&quot;]` will capture the content after &quot;/route/&quot;,</span>
+<span class="doccomment">/// and if the associated variant is defined as `Route{id: usize}`, then the string that was captured will be</span>
+<span class="doccomment">/// transformed into a `usize`.</span>
+<span class="doccomment">/// If the conversion fails, then the match won&#39;t succeed and the next variant will be tried instead.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// There are also `{*:field_name}` and `{3:field_name}` types of capture sections that will capture</span>
+<span class="doccomment">/// _everything_, and the next 3 path sections respectively.</span>
+<span class="doccomment">/// `{1:field_name}` is the same as `{field_name}`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Tuple-structs and Tuple-enum-variants are also supported.</span>
+<span class="doccomment">/// If you don&#39;t want to specify keys that don&#39;t correspond to any specific field,</span>
+<span class="doccomment">/// `{}`, `{*}`, and `{4}` also denote valid capture sections when used on structs and variants without named fields.</span>
+<span class="doccomment">/// In datastructures without field names, the captures will be assigned in order - left to right.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Note</span>
+<span class="doccomment">/// It should be mentioned that the derived function for matching will try enum variants in order,</span>
+<span class="doccomment">/// from top to bottom, and that the whole route doesn&#39;t need to be matched by the route</span>
+<span class="doccomment">/// matcher string in order for the match to succeed.</span>
+<span class="doccomment">/// What is meant by this is that `[to = &quot;/&quot;]` will match &quot;/&quot;, but also &quot;/anything/else&quot;,</span>
+<span class="doccomment">/// because as soon as the &quot;/&quot; is satisfied, that is considered a match.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This can be mitigated by specifying a `!` at the end of your route to inform the matcher that if</span>
+<span class="doccomment">/// any characters are left after matching the route matcher string, the match should fail.</span>
+<span class="doccomment">/// This means that `[to = &quot;/!&quot;]` will match &quot;/&quot; and _only_ &quot;/&quot;.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// -----</span>
+<span class="doccomment">/// There are other attributes as well.</span>
+<span class="doccomment">/// `#[rest]`, `#[rest=&quot;field_name&quot;]` and `#[end]` attributes exist as well.</span>
+<span class="doccomment">/// `#[rest]` and `#[rest=&quot;field_name&quot;]` are equivalent to `{*}` and `{*:field_name}` respectively.</span>
+<span class="doccomment">/// `#[end]` is equivalent to `!`.</span>
+<span class="doccomment">/// The `#[rest]` attributes are good if you just want to delegate the whole matching of a variant to a specific</span>
+<span class="doccomment">/// wrapped struct or enum that also implements `Switch`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ------</span>
+<span class="doccomment">/// # Example</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// use yew_router::Switch;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// #[derive(Switch, Clone)]</span>
+<span class="doccomment">/// enum AppRoute {</span>
+<span class="doccomment">///     #[to = &quot;/some/simple/route&quot;]</span>
+<span class="doccomment">///     SomeSimpleRoute,</span>
+<span class="doccomment">///     #[to = &quot;/capture/{}&quot;]</span>
+<span class="doccomment">///     Capture(String),</span>
+<span class="doccomment">///     #[to = &quot;/named/capture/{name}&quot;]</span>
+<span class="doccomment">///     NamedCapture { name: String },</span>
+<span class="doccomment">///     #[to = &quot;/convert/{id}&quot;]</span>
+<span class="doccomment">///     Convert { id: usize },</span>
+<span class="doccomment">///     #[rest] // shorthand for #[to=&quot;{*}&quot;]</span>
+<span class="doccomment">///     Inner(InnerRoute),</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// #[derive(Switch, Clone)]</span>
+<span class="doccomment">/// #[to = &quot;/inner/route/{first}/{second}&quot;]</span>
+<span class="doccomment">/// struct InnerRoute {</span>
+<span class="doccomment">///     first: String,</span>
+<span class="doccomment">///     second: String,</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// Check out the examples directory in the repository to see some more usages of the routing syntax.</span>
+<span class="attribute">#[<span class="ident">proc_macro_derive</span>(<span class="ident">Switch</span>, <span class="ident">attributes</span>(<span class="ident">to</span>, <span class="ident">rest</span>, <span class="ident">end</span>))]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">switch</span>(<span class="ident">tokens</span>: <span class="ident">TokenStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="kw">let</span> <span class="ident">input</span>: <span class="ident">DeriveInput</span> <span class="op">=</span> <span class="macro">parse_macro_input</span><span class="macro">!</span>(<span class="ident">tokens</span> <span class="kw">as</span> <span class="ident">DeriveInput</span>);
+
+    <span class="kw">crate</span>::<span class="ident">switch</span>::<span class="ident">switch_impl</span>(<span class="ident">input</span>)
+        .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="ident">err</span>.<span class="ident">to_compile_error</span>())
+        .<span class="ident">into</span>()
+}
+
+<span class="attribute">#[<span class="ident">proc_macro_attribute</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to</span>(<span class="kw">_</span>: <span class="ident">TokenStream</span>, <span class="kw">_</span>: <span class="ident">TokenStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="ident">TokenStream</span>::<span class="ident">new</span>()
+}
+
+<span class="attribute">#[<span class="ident">proc_macro_attribute</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rest</span>(<span class="kw">_</span>: <span class="ident">TokenStream</span>, <span class="kw">_</span>: <span class="ident">TokenStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="ident">TokenStream</span>::<span class="ident">new</span>()
+}
+
+<span class="attribute">#[<span class="ident">proc_macro_attribute</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">end</span>(<span class="kw">_</span>: <span class="ident">TokenStream</span>, <span class="kw">_</span>: <span class="ident">TokenStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="ident">TokenStream</span>::<span class="ident">new</span>()
+}
+</pre></div>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "yew_router_macro";</script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
