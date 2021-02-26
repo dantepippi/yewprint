@@ -12,6 +12,6 @@ implementors["wasm_bindgen_backend"] = [{"text":"impl Hash for ImportModule","sy
 implementors["yew"] = [{"text":"impl Hash for Key","synthetic":false,"types":[]},{"text":"impl Hash for HandlerId","synthetic":false,"types":[]}];
 implementors["yew_router"] = [{"text":"impl&lt;T:&nbsp;Hash&gt; Hash for LeadingSlash&lt;T&gt;","synthetic":false,"types":[]}];
 implementors["yew_router_route_parser"] = [{"text":"impl Hash for FieldNamingScheme","synthetic":false,"types":[]}];
-implementors["yewprint"] = [{"text":"impl Hash for Intent","synthetic":false,"types":[]},{"text":"impl Hash for Elevation","synthetic":false,"types":[]}];
+implementors["yewprint"] = [{"text":"impl Hash for TextInputType","synthetic":false,"types":[]},{"text":"impl Hash for Intent","synthetic":false,"types":[]},{"text":"impl Hash for Elevation","synthetic":false,"types":[]}];
 implementors["yewtil"] = [{"text":"impl&lt;T:&nbsp;Hash&gt; Hash for Irc&lt;T&gt;","synthetic":false,"types":[]},{"text":"impl&lt;T:&nbsp;Hash&gt; Hash for Mrc&lt;T&gt;","synthetic":false,"types":[]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
