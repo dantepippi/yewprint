@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors["anyhow"] = [{"text":"impl&lt;'_&gt; Default for Chain&lt;'_&gt;","synthetic":false,"types":[]}];
+implementors["anyhow"] = [{"text":"impl Default for Chain&lt;'_&gt;","synthetic":false,"types":[]}];
 implementors["anymap"] = [{"text":"impl&lt;A:&nbsp;?Sized + UncheckedAnyExt&gt; Default for RawMap&lt;A&gt;","synthetic":false,"types":[]}];
 implementors["arrayvec"] = [{"text":"impl&lt;A&gt; Default for ArrayString&lt;A&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;A: Array&lt;Item = u8&gt; + Copy,&nbsp;</span>","synthetic":false,"types":[]},{"text":"impl&lt;A:&nbsp;Array&gt; Default for ArrayVec&lt;A&gt;","synthetic":false,"types":[]}];
 implementors["bincode"] = [{"text":"impl Default for DefaultOptions","synthetic":false,"types":[]}];
