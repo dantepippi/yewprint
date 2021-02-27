@@ -71,11 +71,11 @@
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ProgressBar</span> {
-    <span class="ident">props</span>: <span class="ident">Props</span>,
+    <span class="ident">props</span>: <span class="ident">ProgressBarProps</span>,
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Properties</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Props</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ProgressBarProps</span> {
     <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
     <span class="kw">pub</span> <span class="ident">animate</span>: <span class="ident">bool</span>,
     <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
@@ -88,7 +88,7 @@
 
 <span class="kw">impl</span> <span class="ident">Component</span> <span class="kw">for</span> <span class="ident">ProgressBar</span> {
     <span class="kw">type</span> <span class="ident">Message</span> <span class="op">=</span> ();
-    <span class="kw">type</span> <span class="ident">Properties</span> <span class="op">=</span> <span class="ident">Props</span>;
+    <span class="kw">type</span> <span class="ident">Properties</span> <span class="op">=</span> <span class="ident">ProgressBarProps</span>;
 
     <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">props</span>: <span class="self">Self</span>::<span class="ident">Properties</span>, <span class="ident">_link</span>: <span class="ident">ComponentLink</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> { <span class="ident">props</span> }

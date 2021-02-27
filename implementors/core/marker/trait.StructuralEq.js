@@ -1,5 +1,6 @@
 (function() {var implementors = {};
 implementors["arrayvec"] = [{"text":"impl&lt;T&gt; StructuralEq for CapacityError&lt;T&gt;","synthetic":false,"types":[]}];
+implementors["bumpalo"] = [{"text":"impl&lt;E&gt; StructuralEq for AllocOrInitError&lt;E&gt;","synthetic":false,"types":[]}];
 implementors["byteorder"] = [{"text":"impl StructuralEq for BigEndian","synthetic":false,"types":[]},{"text":"impl StructuralEq for LittleEndian","synthetic":false,"types":[]}];
 implementors["hashbrown"] = [{"text":"impl StructuralEq for TryReserveError","synthetic":false,"types":[]}];
 implementors["http"] = [{"text":"impl StructuralEq for HeaderName","synthetic":false,"types":[]},{"text":"impl StructuralEq for Method","synthetic":false,"types":[]},{"text":"impl StructuralEq for StatusCode","synthetic":false,"types":[]},{"text":"impl StructuralEq for Version","synthetic":false,"types":[]}];
