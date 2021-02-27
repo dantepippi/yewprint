@@ -88,10 +88,8 @@
 <span id="85">85</span>
 <span id="86">86</span>
 <span id="87">87</span>
-<span id="88">88</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Icon</span>, <span class="ident">IconName</span>, <span class="ident">Intent</span>};
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Button</span> {
@@ -146,9 +144,9 @@
             <span class="op">&lt;</span><span class="ident">button</span>
                 <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
                     <span class="string">&quot;bp3-button&quot;</span>,
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">fill</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-fill&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">minimal</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-minimal&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-disabled&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">fill</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-fill&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">minimal</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-minimal&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-disabled&quot;</span>),
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">intent</span>,
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
                 )

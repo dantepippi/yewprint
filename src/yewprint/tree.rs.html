@@ -371,12 +371,10 @@
 <span id="368">368</span>
 <span id="369">369</span>
 <span id="370">370</span>
-<span id="371">371</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">collapse</span>::<span class="ident">Collapse</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">icon</span>::{<span class="ident">Icon</span>, <span class="ident">IconName</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Intent</span>;
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">id_tree</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::{<span class="ident">Ref</span>, <span class="ident">RefCell</span>, <span class="ident">RefMut</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">hash_map</span>::<span class="ident">DefaultHasher</span>;
@@ -687,7 +685,7 @@
         <span class="macro">html</span><span class="macro">!</span> {
             <span class="op">&lt;</span><span class="ident">li</span> <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
                 <span class="string">&quot;bp3-tree-node&quot;</span>,
-                <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">is_selected</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-tree-node-selected&quot;</span>)
+                <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">is_selected</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-tree-node-selected&quot;</span>)
             )<span class="op">&gt;</span>
                 <span class="op">&lt;</span><span class="ident">div</span>
                     <span class="ident">class</span><span class="op">=</span><span class="string">&quot;bp3-tree-node-content&quot;</span>

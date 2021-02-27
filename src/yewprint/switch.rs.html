@@ -70,9 +70,7 @@
 <span id="67">67</span>
 <span id="68">68</span>
 <span id="69">69</span>
-<span id="70">70</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Switch</span> {
@@ -122,9 +120,9 @@
                 <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
                     <span class="string">&quot;bp3-control&quot;</span>,
                     <span class="string">&quot;bp3-switch&quot;</span>,
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-disabled&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">inline</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-inline&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-large&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-disabled&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">inline</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-inline&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-large&quot;</span>),
                 )
             <span class="op">&gt;</span>
             <span class="op">&lt;</span><span class="ident">input</span>

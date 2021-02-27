@@ -47,9 +47,7 @@
 <span id="44">44</span>
 <span id="45">45</span>
 <span id="46">46</span>
-<span id="47">47</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Divider</span> {
@@ -90,7 +88,7 @@
             <span class="op">&lt;</span><span class="ident">span</span>
                 <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
                     <span class="string">&quot;bp3-divider&quot;</span>,
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">vertical</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-vertical&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">vertical</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-vertical&quot;</span>),
                 )
             <span class="op">/</span><span class="op">&gt;</span>
         }

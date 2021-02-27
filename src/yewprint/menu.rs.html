@@ -203,7 +203,6 @@
 <span id="200">200</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Icon</span>, <span class="ident">IconName</span>, <span class="ident">Intent</span>, <span class="ident">H6</span>};
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Menu</span> {
@@ -247,7 +246,7 @@
             <span class="op">&lt;</span><span class="ident">ul</span>
                 <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
                     <span class="string">&quot;bp3-menu&quot;</span>,
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-large&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-large&quot;</span>),
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
                 )
                 <span class="kw-2">ref</span><span class="op">=</span>{<span class="self">self</span>.<span class="ident">props</span>.<span class="ident">r#ref</span>.<span class="ident">clone</span>()}
@@ -318,14 +317,14 @@
                 <span class="op">&lt;</span><span class="ident">a</span>
                     <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
                         <span class="string">&quot;bp3-menu-item&quot;</span>,
-                        <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">active</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-active&quot;</span>),
-                        <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-disabled&quot;</span>),
+                        <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">active</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-active&quot;</span>),
+                        <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-disabled&quot;</span>),
                         <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">intent</span>
-                            .<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">active</span>.<span class="ident">as_some</span>(<span class="ident">Intent</span>::<span class="ident">Primary</span>)),
+                            .<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">active</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Intent</span>::<span class="ident">Primary</span>)),
                         <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
                     )
-                    <span class="ident">href</span><span class="question-mark">?</span><span class="op">=</span>{(<span class="op">!</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>).<span class="ident">and_option</span>(<span class="self">self</span>.<span class="ident">props</span>.<span class="ident">href</span>.<span class="ident">clone</span>())}
-                    <span class="ident">tabIndex</span><span class="question-mark">?</span><span class="op">=</span>{(<span class="op">!</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>).<span class="ident">as_some</span>(<span class="number">0</span>)}
+                    <span class="ident">href</span><span class="question-mark">?</span><span class="op">=</span>{(<span class="op">!</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>).<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">href</span>.<span class="ident">clone</span>())}.<span class="ident">flatten</span>()
+                    <span class="ident">tabIndex</span><span class="question-mark">?</span><span class="op">=</span>{(<span class="op">!</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>).<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="number">0</span>)}
                     <span class="ident">onclick</span><span class="op">=</span>{<span class="self">self</span>.<span class="ident">props</span>.<span class="ident">onclick</span>.<span class="ident">clone</span>()}
                 <span class="op">&gt;</span>
                     <span class="op">&lt;</span><span class="ident">Icon</span> <span class="ident">icon</span><span class="op">=</span>{<span class="self">self</span>.<span class="ident">props</span>.<span class="ident">icon</span>} <span class="op">/</span><span class="op">&gt;</span>
@@ -347,6 +346,7 @@
                             <span class="macro">html</span><span class="macro">!</span>()
                         }
                     }
+
                 <span class="op">&lt;</span><span class="op">/</span><span class="ident">a</span><span class="op">&gt;</span>
             <span class="op">&lt;</span><span class="op">/</span><span class="ident">li</span><span class="op">&gt;</span>
         }

@@ -56,10 +56,8 @@
 <span id="53">53</span>
 <span id="54">54</span>
 <span id="55">55</span>
-<span id="56">56</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Elevation</span>;
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Properties</span>)]</span>
@@ -106,7 +104,7 @@
                 <span class="string">&quot;bp3-card&quot;</span>,
                 <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
                 <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">elevation</span>,
-                <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">interactive</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-interactive&quot;</span>),
+                <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">interactive</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-interactive&quot;</span>),
             )
             <span class="ident">onclick</span><span class="op">=</span>{<span class="self">self</span>.<span class="ident">props</span>.<span class="ident">onclick</span>.<span class="ident">clone</span>()}<span class="op">&gt;</span>
                 {<span class="self">self</span>.<span class="ident">props</span>.<span class="ident">children</span>.<span class="ident">clone</span>()}

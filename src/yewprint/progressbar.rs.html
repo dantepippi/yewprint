@@ -64,10 +64,8 @@
 <span id="61">61</span>
 <span id="62">62</span>
 <span id="63">63</span>
-<span id="64">64</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Intent</span>;
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ProgressBar</span> {
@@ -121,8 +119,8 @@
                 <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
                     <span class="string">&quot;bp3-progress-bar&quot;</span>,
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">intent</span>,
-                    (<span class="op">!</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">animate</span>).<span class="ident">as_some</span>(<span class="string">&quot;bp3-no-animation&quot;</span>),
-                    (<span class="op">!</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">stripes</span>).<span class="ident">as_some</span>(<span class="string">&quot;bp3-no-stripes&quot;</span>)
+                    (<span class="op">!</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">animate</span>).<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-no-animation&quot;</span>),
+                    (<span class="op">!</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">stripes</span>).<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-no-stripes&quot;</span>)
                 )
             <span class="op">&gt;</span>
                 <span class="op">&lt;</span><span class="ident">div</span> <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(<span class="string">&quot;bp3-progress-meter&quot;</span>) <span class="ident">style</span><span class="op">=</span>{{<span class="ident">width</span>}}<span class="op">/</span><span class="op">&gt;</span>

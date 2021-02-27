@@ -120,10 +120,8 @@
 <span id="117">117</span>
 <span id="118">118</span>
 <span id="119">119</span>
-<span id="120">120</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Icon</span>, <span class="ident">IconName</span>};
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">hash_map</span>::<span class="ident">DefaultHasher</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
@@ -215,10 +213,10 @@
             <span class="op">&lt;</span><span class="ident">div</span>
                 <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
                     <span class="string">&quot;bp3-html-select&quot;</span>,
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">minimal</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-minimal&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-large&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">fill</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-fill&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-disabled&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">minimal</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-minimal&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-large&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">fill</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-fill&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-disabled&quot;</span>),
                 )
             <span class="op">&gt;</span>
                 <span class="op">&lt;</span><span class="ident">select</span>

@@ -57,9 +57,7 @@
 <span id="54">54</span>
 <span id="55">55</span>
 <span id="56">56</span>
-<span id="57">57</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Text</span> {
@@ -107,7 +105,7 @@
             <span class="op">&lt;</span>@{<span class="kw">if</span> <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">inline</span> { <span class="string">&quot;span&quot;</span> } <span class="kw">else</span> { <span class="string">&quot;div&quot;</span>}}
                 <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">ellipsize</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-text-overflow-ellipsis&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">ellipsize</span>.<span class="ident">then</span> (<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-text-overflow-ellipsis&quot;</span>),
                 )
                 <span class="ident">title</span><span class="question-mark">?</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">title</span>.<span class="ident">clone</span>()
             <span class="op">&gt;</span>

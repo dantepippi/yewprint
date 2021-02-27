@@ -61,9 +61,7 @@
 <span id="58">58</span>
 <span id="59">59</span>
 <span id="60">60</span>
-<span id="61">61</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ButtonGroup</span> {
@@ -112,10 +110,10 @@
             <span class="op">&lt;</span><span class="ident">div</span>
                 <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
                     <span class="string">&quot;bp3-button-group&quot;</span>,
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">minimal</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-minimal&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">fill</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-fill&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-large&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">vertical</span>.<span class="ident">as_some</span>(<span class="string">&quot;bp3-vertical&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">minimal</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-minimal&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">fill</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-fill&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-large&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">vertical</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-vertical&quot;</span>),
                 )
                 <span class="ident">style</span><span class="question-mark">?</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">style</span>.<span class="ident">clone</span>()
             <span class="op">&gt;</span>
