@@ -120,6 +120,9 @@
 <span id="117">117</span>
 <span id="118">118</span>
 <span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Icon</span>, <span class="ident">IconName</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">hash_map</span>::<span class="ident">DefaultHasher</span>;
@@ -150,6 +153,8 @@
     <span class="kw">pub</span> <span class="ident">options</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">T</span>, <span class="ident">String</span>)<span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
     <span class="kw">pub</span> <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
+    <span class="kw">pub</span> <span class="ident">class</span>: <span class="ident">Classes</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">PartialEq</span> <span class="op">+</span> <span class="ident">Hash</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">Component</span> <span class="kw">for</span> <span class="ident">HtmlSelect</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
@@ -217,6 +222,7 @@
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-large&quot;</span>),
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">fill</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-fill&quot;</span>),
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">disabled</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-disabled&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
                 )
             <span class="op">&gt;</span>
                 <span class="op">&lt;</span><span class="ident">select</span>
