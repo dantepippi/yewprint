@@ -199,6 +199,11 @@
 <span id="196">196</span>
 <span id="197">197</span>
 <span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
 <span class="kw">use</span> <span class="ident">web_sys</span>::<span class="ident">Element</span>;
@@ -229,6 +234,8 @@
     <span class="kw">pub</span> <span class="ident">keep_children_mounted</span>: <span class="ident">bool</span>,
     <span class="attribute">#[<span class="ident">prop_or</span>(<span class="ident">Duration</span>::<span class="ident">from_millis</span>(<span class="number">200</span>))]</span>
     <span class="kw">pub</span> <span class="ident">transition_duration</span>: <span class="ident">Duration</span>,
+    <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
+    <span class="kw">pub</span> <span class="ident">class</span>: <span class="ident">Classes</span>,
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
@@ -381,7 +388,10 @@
         <span class="macro">html</span><span class="macro">!</span> {
             <span class="op">&lt;</span><span class="ident">div</span> <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(<span class="string">&quot;bp3-collapse&quot;</span>) <span class="ident">style</span><span class="op">=</span>{<span class="ident">container_style</span>}<span class="op">&gt;</span>
                 <span class="op">&lt;</span><span class="ident">div</span>
-                    <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(<span class="string">&quot;bp3-collapse-body&quot;</span>)
+                    <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
+                        <span class="string">&quot;bp3-collapse-body&quot;</span>,
+                        <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
+                    )
                     <span class="ident">style</span><span class="op">=</span>{<span class="ident">content_style</span>}
                     <span class="ident">aria</span><span class="op">-</span><span class="ident">hidden</span><span class="op">=</span>{<span class="op">!</span><span class="self">self</span>.<span class="ident">render_children</span>}
                     <span class="kw-2">ref</span><span class="op">=</span>{<span class="self">self</span>.<span class="ident">contents_ref</span>.<span class="ident">clone</span>()}

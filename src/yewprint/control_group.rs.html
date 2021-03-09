@@ -52,6 +52,9 @@
 <span id="49">49</span>
 <span id="50">50</span>
 <span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
@@ -67,6 +70,8 @@
     <span class="kw">pub</span> <span class="ident">vertical</span>: <span class="ident">bool</span>,
     <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
     <span class="kw">pub</span> <span class="ident">children</span>: <span class="ident">html</span>::<span class="ident">Children</span>,
+    <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
+    <span class="kw">pub</span> <span class="ident">class</span>: <span class="ident">Classes</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Component</span> <span class="kw">for</span> <span class="ident">ControlGroup</span> {
@@ -97,6 +102,7 @@
                     <span class="string">&quot;bp3-control-group&quot;</span>,
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">fill</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-fill&quot;</span>),
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">vertical</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-vertical&quot;</span>),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
                 )
             <span class="op">&gt;</span>
                 {<span class="self">self</span>.<span class="ident">props</span>.<span class="ident">children</span>.<span class="ident">clone</span>()}

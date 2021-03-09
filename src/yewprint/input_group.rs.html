@@ -146,6 +146,9 @@
 <span id="143">143</span>
 <span id="144">144</span>
 <span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Icon</span>, <span class="ident">IconName</span>};
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
@@ -215,6 +218,8 @@
     <span class="kw">pub</span> <span class="ident">right_element</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">yew</span>::<span class="ident">virtual_dom</span>::<span class="ident">VNode</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
     <span class="kw">pub</span> <span class="ident">input_type</span>: <span class="ident">TextInputType</span>,
+    <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
+    <span class="kw">pub</span> <span class="ident">class</span>: <span class="ident">Classes</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Component</span> <span class="kw">for</span> <span class="ident">InputGroup</span> {
@@ -248,7 +253,8 @@
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-large&quot;</span>),
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">small</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-small&quot;</span>),
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">round</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-round&quot;</span>),
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">placeholder</span>.<span class="ident">clone</span>()
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">placeholder</span>.<span class="ident">clone</span>(),
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
                 )
             <span class="op">&gt;</span>
                 {

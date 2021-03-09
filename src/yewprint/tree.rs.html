@@ -371,6 +371,11 @@
 <span id="368">368</span>
 <span id="369">369</span>
 <span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">collapse</span>::<span class="ident">Collapse</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">icon</span>::{<span class="ident">Icon</span>, <span class="ident">IconName</span>};
@@ -431,6 +436,8 @@
     <span class="kw">pub</span> <span class="ident">on_expand</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Callback</span><span class="op">&lt;</span>(<span class="ident">NodeId</span>, <span class="ident">MouseEvent</span>)<span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
     <span class="kw">pub</span> <span class="ident">onclick</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Callback</span><span class="op">&lt;</span>(<span class="ident">NodeId</span>, <span class="ident">MouseEvent</span>)<span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
+    <span class="kw">pub</span> <span class="ident">class</span>: <span class="ident">Classes</span>,
 }
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">NodeData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
@@ -514,7 +521,10 @@
         };
 
         <span class="macro">html</span><span class="macro">!</span> {
-            <span class="op">&lt;</span><span class="ident">div</span> <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(<span class="string">&quot;bp3-tree&quot;</span>)<span class="op">&gt;</span>
+            <span class="op">&lt;</span><span class="ident">div</span> <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(
+                <span class="string">&quot;bp3-tree&quot;</span>,
+                <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
+            )<span class="op">&gt;</span>
                 <span class="op">&lt;</span><span class="ident">ul</span> <span class="ident">class</span><span class="op">=</span><span class="macro">classes</span><span class="macro">!</span>(<span class="string">&quot;bp3-tree-node-list&quot;</span>)<span class="op">&gt;</span>
                     {<span class="ident">nodes</span>}
                 <span class="op">&lt;</span><span class="op">/</span><span class="ident">ul</span><span class="op">&gt;</span>
