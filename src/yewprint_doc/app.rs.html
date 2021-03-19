@@ -301,6 +301,16 @@
 <span id="298">298</span>
 <span id="299">299</span>
 <span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">button_group</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">buttons</span>::<span class="kw-2">*</span>;
@@ -314,6 +324,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">input_group</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">menu</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">progressbar</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">spinner</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">switch</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">tabs</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">tag</span>::<span class="kw-2">*</span>;
@@ -488,6 +499,12 @@
                                         .<span class="ident">callback</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Msg</span>::<span class="ident">GoToMenu</span>(<span class="ident">DocMenu</span>::<span class="ident">ProgressBar</span>))
                                 <span class="op">/</span><span class="op">&gt;</span>
                                 <span class="op">&lt;</span><span class="ident">MenuItem</span>
+                                    <span class="ident">text</span><span class="op">=</span>{<span class="macro">html</span><span class="macro">!</span>(<span class="string">&quot;Spinner&quot;</span>)}
+                                    <span class="ident">href</span><span class="op">=</span><span class="string">&quot;#spinner&quot;</span>
+                                    <span class="ident">onclick</span><span class="op">=</span><span class="self">self</span>.<span class="ident">link</span>
+                                        .<span class="ident">callback</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Msg</span>::<span class="ident">GoToMenu</span>(<span class="ident">DocMenu</span>::<span class="ident">Spinner</span>))
+                                <span class="op">/</span><span class="op">&gt;</span>
+                                <span class="op">&lt;</span><span class="ident">MenuItem</span>
                                     <span class="ident">text</span><span class="op">=</span>{<span class="macro">html</span><span class="macro">!</span>(<span class="string">&quot;Switch&quot;</span>)}
                                     <span class="ident">href</span><span class="op">=</span><span class="string">&quot;#switch&quot;</span>
                                     <span class="ident">onclick</span><span class="op">=</span><span class="self">self</span>.<span class="ident">link</span>
@@ -547,6 +564,7 @@
                                         <span class="ident">DocMenu</span>::<span class="ident">InputGroup</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">html</span><span class="macro">!</span>(<span class="op">&lt;</span><span class="ident">InputGroupDoc</span> <span class="op">/</span><span class="op">&gt;</span>),
                                         <span class="ident">DocMenu</span>::<span class="ident">Menu</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">html</span><span class="macro">!</span>(<span class="op">&lt;</span><span class="ident">MenuDoc</span> <span class="op">/</span><span class="op">&gt;</span>),
                                         <span class="ident">DocMenu</span>::<span class="ident">ProgressBar</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">html</span><span class="macro">!</span>(<span class="op">&lt;</span><span class="ident">ProgressBarDoc</span> <span class="op">/</span><span class="op">&gt;</span>),
+                                        <span class="ident">DocMenu</span>::<span class="ident">Spinner</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">html</span><span class="macro">!</span>(<span class="op">&lt;</span><span class="ident">SpinnerDoc</span> <span class="op">/</span><span class="op">&gt;</span>),
                                         <span class="ident">DocMenu</span>::<span class="ident">Switch</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">html</span><span class="macro">!</span>(<span class="op">&lt;</span><span class="ident">SwitchDoc</span> <span class="op">/</span><span class="op">&gt;</span>),
                                         <span class="ident">DocMenu</span>::<span class="ident">Tabs</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">html</span><span class="macro">!</span>(<span class="op">&lt;</span><span class="ident">TabsDoc</span> <span class="op">/</span><span class="op">&gt;</span>),
                                         <span class="ident">DocMenu</span>::<span class="ident">Tag</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">html</span><span class="macro">!</span>(<span class="op">&lt;</span><span class="ident">TagDoc</span> <span class="op">/</span><span class="op">&gt;</span>),
@@ -589,6 +607,8 @@
     <span class="ident">Menu</span>,
     <span class="attribute">#[<span class="ident">to</span> <span class="op">=</span> <span class="string">&quot;/#progress-bar&quot;</span>]</span>
     <span class="ident">ProgressBar</span>,
+    <span class="attribute">#[<span class="ident">to</span> <span class="op">=</span> <span class="string">&quot;/#spinner&quot;</span>]</span>
+    <span class="ident">Spinner</span>,
     <span class="attribute">#[<span class="ident">to</span> <span class="op">=</span> <span class="string">&quot;/#switch&quot;</span>]</span>
     <span class="ident">Switch</span>,
     <span class="attribute">#[<span class="ident">to</span> <span class="op">=</span> <span class="string">&quot;/#tabs&quot;</span>]</span>

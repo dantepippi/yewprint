@@ -107,8 +107,8 @@
     }
 }
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SIZE_STANDARD</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">16</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SIZE_LARGE</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">20</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ICON_SIZE_STANDARD</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">16</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ICON_SIZE_LARGE</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">20</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Icon</span> {
     <span class="ident">props</span>: <span class="ident">IconProps</span>,
@@ -153,15 +153,15 @@
     }
 
     <span class="kw">fn</span> <span class="ident">view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Html</span> {
-        <span class="kw">let</span> <span class="ident">paths</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">icon_size</span> <span class="op">=</span><span class="op">=</span> <span class="ident">SIZE_STANDARD</span> {
+        <span class="kw">let</span> <span class="ident">paths</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">icon_size</span> <span class="op">=</span><span class="op">=</span> <span class="ident">ICON_SIZE_STANDARD</span> {
             <span class="ident">icon_svg_paths_16</span>(<span class="self">self</span>.<span class="ident">props</span>.<span class="ident">icon</span>)
         } <span class="kw">else</span> {
             <span class="ident">icon_svg_paths_20</span>(<span class="self">self</span>.<span class="ident">props</span>.<span class="ident">icon</span>)
         };
-        <span class="kw">let</span> <span class="ident">pixel_grid_size</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">icon_size</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">SIZE_LARGE</span> {
-            <span class="ident">SIZE_LARGE</span>
+        <span class="kw">let</span> <span class="ident">pixel_grid_size</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">icon_size</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">ICON_SIZE_LARGE</span> {
+            <span class="ident">ICON_SIZE_LARGE</span>
         } <span class="kw">else</span> {
-            <span class="ident">SIZE_STANDARD</span>
+            <span class="ident">ICON_SIZE_STANDARD</span>
         };
         <span class="kw">let</span> <span class="ident">icon_string</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">icon</span>);
 

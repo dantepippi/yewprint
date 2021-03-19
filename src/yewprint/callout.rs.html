@@ -81,7 +81,7 @@
 <span id="78">78</span>
 <span id="79">79</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">icon</span>::<span class="ident">SIZE_LARGE</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">icon</span>::<span class="ident">ICON_SIZE_LARGE</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Icon</span>, <span class="ident">IconName</span>, <span class="ident">Intent</span>};
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
@@ -147,7 +147,7 @@
             <span class="op">&lt;</span><span class="ident">div</span> <span class="ident">class</span><span class="op">=</span><span class="ident">classes</span><span class="op">&gt;</span>
                 {
                     <span class="ident">icon</span>.<span class="ident">iter</span>()
-                        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">name</span><span class="op">|</span> <span class="macro">html</span><span class="macro">!</span>{<span class="op">&lt;</span><span class="ident">Icon</span> <span class="ident">icon</span><span class="op">=</span><span class="ident">name</span> <span class="ident">icon_size</span><span class="op">=</span><span class="ident">SIZE_LARGE</span><span class="op">/</span><span class="op">&gt;</span>})
+                        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">name</span><span class="op">|</span> <span class="macro">html</span><span class="macro">!</span>{<span class="op">&lt;</span><span class="ident">Icon</span> <span class="ident">icon</span><span class="op">=</span><span class="ident">name</span> <span class="ident">icon_size</span><span class="op">=</span><span class="ident">ICON_SIZE_LARGE</span><span class="op">/</span><span class="op">&gt;</span>})
                         .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Html</span><span class="op">&gt;</span>()
                 }
                 {
