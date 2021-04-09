@@ -113,6 +113,9 @@
 <span id="110">110</span>
 <span id="111">111</span>
 <span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">if_html</span>, <span class="ident">Icon</span>, <span class="ident">IconName</span>, <span class="ident">Intent</span>, <span class="ident">Text</span>};
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
@@ -154,6 +157,8 @@
     <span class="kw">pub</span> <span class="ident">title</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
     <span class="kw">pub</span> <span class="ident">class</span>: <span class="ident">Classes</span>,
+    <span class="attribute">#[<span class="ident">prop_or_default</span>]</span>
+    <span class="kw">pub</span> <span class="ident">style</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Component</span> <span class="kw">for</span> <span class="ident">Tag</span> {
@@ -209,6 +214,7 @@
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">round</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;bp3-round&quot;</span>),
                     <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">class</span>.<span class="ident">clone</span>(),
                 )
+                <span class="ident">style</span><span class="question-mark">?</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">style</span>.<span class="ident">clone</span>()
                 <span class="ident">onclick</span><span class="op">=</span>{<span class="self">self</span>.<span class="ident">props</span>.<span class="ident">onclick</span>.<span class="ident">clone</span>()}
             <span class="op">&gt;</span>
                 {<span class="ident">icon</span>}
@@ -227,4 +233,5 @@
     }
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "yewprint";</script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="yewprint"></div>
+    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
