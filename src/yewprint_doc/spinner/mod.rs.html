@@ -110,13 +110,17 @@
 <span id="107">107</span>
 <span id="108">108</span>
 <span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">mod</span> <span class="ident">example</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">ExampleContainer</span>;
 <span class="kw">use</span> <span class="ident">example</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">yewprint</span>::{<span class="ident">HtmlSelect</span>, <span class="ident">Intent</span>, <span class="ident">H1</span>, <span class="ident">H5</span>};
+<span class="kw">use</span> <span class="ident">yewprint</span>::{<span class="ident">HtmlSelect</span>, <span class="ident">Intent</span>, <span class="ident">Slider</span>, <span class="ident">H1</span>, <span class="ident">H5</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SpinnerDoc</span> {
     <span class="ident">callback</span>: <span class="ident">Callback</span><span class="op">&lt;</span><span class="ident">ExampleProps</span><span class="op">&gt;</span>,
@@ -195,20 +199,24 @@
                             ..<span class="ident">props</span>
                         })
                     <span class="op">/</span><span class="op">&gt;</span>
-                    <span class="op">&lt;</span><span class="ident">p</span><span class="op">&gt;</span>{<span class="string">&quot;Select Size:&quot;</span>}<span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span>
-                    <span class="op">&lt;</span><span class="ident">HtmlSelect</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
-                        <span class="ident">value</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">size</span>
-                        <span class="ident">options</span><span class="op">=</span>{<span class="macro">vec</span><span class="macro">!</span>[
-                            (<span class="number">10</span>, <span class="string">&quot;Very Small&quot;</span>.<span class="ident">to_string</span>()),
-                            (<span class="number">20</span>, <span class="string">&quot;Small&quot;</span>.<span class="ident">to_string</span>()),
-                            (<span class="number">30</span>, <span class="string">&quot;Small +10&quot;</span>.<span class="ident">to_string</span>()),
-                            (<span class="number">40</span>, <span class="string">&quot;Standard -10&quot;</span>.<span class="ident">to_string</span>()),
-                            (<span class="number">50</span>, <span class="string">&quot;Standard&quot;</span>.<span class="ident">to_string</span>()),
-                            (<span class="number">60</span>, <span class="string">&quot;Standard +10&quot;</span>.<span class="ident">to_string</span>()),
-                            (<span class="number">70</span>, <span class="string">&quot;Not really Standard&quot;</span>.<span class="ident">to_string</span>()),
-                            (<span class="number">80</span>, <span class="string">&quot;Not really Large&quot;</span>.<span class="ident">to_string</span>()),
-                            (<span class="number">90</span>, <span class="string">&quot;Large -10&quot;</span>.<span class="ident">to_string</span>()),
-                            (<span class="number">100</span>, <span class="string">&quot;Large&quot;</span>.<span class="ident">to_string</span>()),
+                    <span class="op">&lt;</span><span class="ident">p</span>
+                        <span class="ident">style</span><span class="op">=</span><span class="string">&quot;margin-top: 5px;&quot;</span>
+                    <span class="op">&gt;</span>
+                        {<span class="string">&quot;Select Size:&quot;</span>}
+                    <span class="op">&lt;</span><span class="op">/</span><span class="ident">p</span><span class="op">&gt;</span>
+                    <span class="op">&lt;</span><span class="ident">Slider</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
+                        <span class="ident">selected</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">size</span>
+                        <span class="ident">values</span><span class="op">=</span>{<span class="macro">vec</span><span class="macro">!</span>[
+                            (<span class="number">10</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;10&quot;</span>.<span class="ident">to_string</span>())),
+                            (<span class="number">20</span>, <span class="prelude-val">None</span>),
+                            (<span class="number">30</span>, <span class="prelude-val">None</span>),
+                            (<span class="number">40</span>, <span class="prelude-val">None</span>),
+                            (<span class="number">50</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;50&quot;</span>.<span class="ident">to_string</span>())),
+                            (<span class="number">60</span>, <span class="prelude-val">None</span>),
+                            (<span class="number">70</span>, <span class="prelude-val">None</span>),
+                            (<span class="number">80</span>, <span class="prelude-val">None</span>),
+                            (<span class="number">90</span>, <span class="prelude-val">None</span>),
+                            (<span class="number">100</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;100&quot;</span>.<span class="ident">to_string</span>())),
                         ]}
                         <span class="ident">onchange</span><span class="op">=</span><span class="self">self</span>.<span class="ident">update_props</span>(<span class="op">|</span><span class="ident">props</span>, <span class="ident">size</span><span class="op">|</span> <span class="ident">ExampleProps</span> {
                             <span class="ident">size</span>,
