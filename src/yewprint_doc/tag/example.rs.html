@@ -101,9 +101,7 @@
 <span id="98"> 98</span>
 <span id="99"> 99</span>
 <span id="100">100</span>
-<span id="101">101</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">boolinator</span>::<span class="ident">Boolinator</span>;
 <span class="kw">use</span> <span class="ident">yew</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">yewprint</span>::{<span class="ident">IconName</span>, <span class="ident">Intent</span>, <span class="ident">Tag</span>};
 
@@ -177,22 +175,22 @@
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">label</span><span class="op">|</span> {
                 <span class="kw">let</span> <span class="ident">remove</span> <span class="op">=</span> {
                     <span class="kw">let</span> <span class="ident">label</span> <span class="op">=</span> <span class="ident">label</span>.<span class="ident">clone</span>();
-                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">removable</span>.<span class="ident">as_some</span>(
+                    <span class="self">self</span>.<span class="ident">props</span>.<span class="ident">removable</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> {
                         <span class="self">self</span>.<span class="ident">link</span>
-                            .<span class="ident">callback</span>(<span class="kw">move</span> <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ExampleMsg</span>::<span class="ident">Remove</span>(<span class="ident">label</span>.<span class="ident">clone</span>())),
-                    )
+                            .<span class="ident">callback</span>(<span class="kw">move</span> <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ExampleMsg</span>::<span class="ident">Remove</span>(<span class="ident">label</span>.<span class="ident">clone</span>()))
+                    })
                 };
                 <span class="macro">html</span><span class="macro">!</span> {
                     <span class="op">&lt;</span><span class="ident">Tag</span>
                         <span class="ident">active</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">active</span>
                         <span class="ident">fill</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">fill</span>
-                        <span class="ident">icon</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">icon</span>.<span class="ident">as_some</span>(<span class="ident">IconName</span>::<span class="ident">Print</span>)
+                        <span class="ident">icon</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">icon</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">IconName</span>::<span class="ident">Print</span>)
                         <span class="ident">intent</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">intent</span>
                         <span class="ident">interactive</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">interactive</span>
                         <span class="ident">large</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">large</span>
                         <span class="ident">minimal</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">minimal</span>
                         <span class="ident">multiline</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">multiline</span>
-                        <span class="ident">right_icon</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">right_icon</span>.<span class="ident">as_some</span>(<span class="ident">IconName</span>::<span class="ident">Star</span>)
+                        <span class="ident">right_icon</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">right_icon</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">IconName</span>::<span class="ident">Star</span>)
                         <span class="ident">round</span><span class="op">=</span><span class="self">self</span>.<span class="ident">props</span>.<span class="ident">round</span>
                         <span class="ident">onremove</span><span class="op">=</span><span class="ident">remove</span>
                         <span class="ident">onclick</span><span class="op">=</span><span class="self">self</span>.<span class="ident">link</span>.<span class="ident">callback</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ExampleMsg</span>::<span class="ident">Click</span>)
