@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Route","The representation of a route, segmented into different sections for easy access."]],"trait":[["RouteState","Any state that can be used in the router agent must meet the criteria of this trait."]]});

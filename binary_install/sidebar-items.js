@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Cache","Global cache for wasm-pack, currently containing binaries downloaded from urls like wasm-bindgen and such."],["Download","Representation of a downloaded tarball/zip"]]});

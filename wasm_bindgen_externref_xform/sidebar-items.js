@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Context","State of the externref pass, used to collect information while bindings are generated and used eventually to actually execute the entire pass."],["Meta",""]]});

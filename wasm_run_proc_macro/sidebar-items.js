@@ -1,0 +1,1 @@
+initSidebarItems({"attr":[["main","Makes an entrypoint to your binary (not WASM)."]]});

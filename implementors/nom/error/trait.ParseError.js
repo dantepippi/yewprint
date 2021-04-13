@@ -1,4 +1,0 @@
-(function() {var implementors = {};
-implementors["nom"] = [];
-implementors["yew_router_route_parser"] = [{"text":"impl <a class=\"trait\" href=\"nom/error/trait.ParseError.html\" title=\"trait nom::error::ParseError\">ParseError</a>&lt;&amp;'_ <a class=\"primitive\" href=\"https://doc.rust-lang.org/nightly/std/primitive.str.html\">str</a>&gt; for <a class=\"struct\" href=\"yew_router_route_parser/struct.ParseError.html\" title=\"struct yew_router_route_parser::ParseError\">ParseError</a>","synthetic":false,"types":["yew_router_route_parser::error::ParseError"]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

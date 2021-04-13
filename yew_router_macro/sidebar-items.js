@@ -1,1 +1,0 @@
-initSidebarItems({"attr":[["end",""],["rest",""],["to",""]],"derive":[["Switch","Implements the `Switch` trait based on attributes present on the struct or enum variants."]]});

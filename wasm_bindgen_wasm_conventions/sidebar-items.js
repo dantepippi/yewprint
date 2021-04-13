@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["get_function_table_entry","Looks up a function table entry by index in the main function table."],["get_memory","Get a Wasm module's canonical linear memory."],["get_shadow_stack_pointer","Get the `__shadow_stack_pointer`."]],"struct":[["FunctionTableEntry",""]]});

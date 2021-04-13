@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["validate","Validates an entire WebAssembly module listed by `bytes`"]]});

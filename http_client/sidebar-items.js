@@ -1,0 +1,1 @@
+initSidebarItems({"attr":[["async_trait",""]],"trait":[["HttpClient","An abstract HTTP client."]],"type":[["Body","The raw body of an http request or response."],["Error","Error type."],["Request","An HTTP Request type with a streaming body."],["Response","An HTTP Response type with a streaming body."]]});

@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `sessions` mod in crate `tide`."><meta name="keywords" content="rust, rustlang, rust-lang, sessions"><title>tide::sessions - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="https://yoshuawuyts.com/assets/http-rs/favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../tide/index.html'><div class='logo-container'><img src='https://yoshuawuyts.com/assets/http-rs/logo-rounded.png' alt='logo'></div></a><p class="location">Module sessions</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#traits">Traits</a></li></ul></div><p class="location"><a href="../index.html">tide</a></p><div id="sidebar-vars" data-name="sessions" data-ty="mod" data-relpath="../"></div><script defer src="../sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Module <a href="../index.html">tide</a>::<wbr><a class="mod" href="">sessions</a></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../src/tide/sessions/mod.rs.html#1-76" title="goto source code">[src]</a></span></h1><div class="docblock"><h1 id="tide-session-support" class="section-header"><a href="#tide-session-support">Tide session support</a></h1>
+<p>This document provides a high-level overview of tide's approach to
+sessions. For implementation and examples, please refer to
+<a href="../../tide/sessions/struct.SessionMiddleware.html">SessionMiddleware</a></p>
+<p>Sessions allows tide to securely attach data to a browser session
+allowing for retrieval and modification of this data within tide
+on subsequent visits. Session data is generally only retained for
+the duration of a browser session.</p>
+<p>Tide's session implementation provides guest sessions by default,
+meaning that all web requests to a session-enabled tide host will
+have a cookie attached, whether or not there is anything stored in
+that client's session yet.</p>
+<h2 id="stores" class="section-header"><a href="#stores">Stores</a></h2>
+<p>Although tide provides two bundled session stores, it is highly
+recommended that tide applications use an
+external-datastore-backed session storage. For a list of currently
+available session stores, see <a href="https://github.com/http-rs/async-session">the documentation for
+async-session</a>.</p>
+<h2 id="security" class="section-header"><a href="#security">Security</a></h2>
+<p>Although each session store may have different security
+implications, the general approach of tide's session system is as
+follows: On each request, tide checks the cookie configurable as
+<code>cookie_name</code> on the middleware.</p>
+<h3 id="if-no-cookie-is-found" class="section-header"><a href="#if-no-cookie-is-found">If no cookie is found:</a></h3>
+<p>A cryptographically random cookie value is generated. A cookie is
+set on the outbound response and signed with an HKDF key derived
+from the <code>secret</code> provided on creation of the SessionMiddleware.
+The configurable session store uses a SHA256 digest of the cookie
+value and stores the session along with a potential expiry.</p>
+<h3 id="if-a-cookie-is-found" class="section-header"><a href="#if-a-cookie-is-found">If a cookie is found:</a></h3>
+<p>The hkdf derived signing key is used to verify the cookie value's
+signature. If it verifies, it is then passed to the session store
+to retrieve a Session. For most session stores, this will involve
+taking a SHA256 digest of the cookie value and retrieving a
+serialized Session from an external datastore based on that
+digest.</p>
+<h3 id="expiry" class="section-header"><a href="#expiry">Expiry</a></h3>
+<p>In addition to setting an expiry on the session cookie, tide
+sessions include the same expiry in their serialization format. If
+an adversary were able to tamper with the expiry of a cookie, tide
+sessions would still check the expiry on the contained session
+before using it</p>
+<h3 id="if-anything-goes-wrong-with-the-above-process" class="section-header"><a href="#if-anything-goes-wrong-with-the-above-process">If anything goes wrong with the above process</a></h3>
+<p>If there are any failures in the above session retrieval process,
+a new empty session is generated for the request, which proceeds
+through the application as normal.</p>
+<h2 id="staleexpired-session-cleanup" class="section-header"><a href="#staleexpired-session-cleanup">Stale/expired session cleanup</a></h2>
+<p>Any session store other than the cookie store will accumulate
+stale sessions.  Although the tide session middleware ensures that
+they will not be used as valid sessions, For most session stores,
+it is the tide application's responsibility to call cleanup on the
+session store if it requires it</p>
+</div><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
+<table><tr class="module-item"><td><a class="struct" href="struct.CookieStore.html" title="tide::sessions::CookieStore struct">CookieStore</a></td><td class="docblock-short"><p>A session store that serializes the entire session into a Cookie.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.MemoryStore.html" title="tide::sessions::MemoryStore struct">MemoryStore</a></td><td class="docblock-short"><p>in-memory session store</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Session.html" title="tide::sessions::Session struct">Session</a></td><td class="docblock-short"><p>The main session type.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.SessionMiddleware.html" title="tide::sessions::SessionMiddleware struct">SessionMiddleware</a></td><td class="docblock-short"><p>Middleware to enable sessions.</p>
+</td></tr></table><h2 id="traits" class="section-header"><a href="#traits">Traits</a></h2>
+<table><tr class="module-item"><td><a class="trait" href="trait.SessionStore.html" title="tide::sessions::SessionStore trait">SessionStore</a></td><td class="docblock-short"><p>An async session backend.</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="tide"></div>
+    <script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

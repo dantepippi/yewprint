@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Irc","Immutable Reference Counted pointer."],["Mrc","Mutable Reference Counted pointer"]]});

@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["wit_walrus"] = [{"text":"impl <a class=\"trait\" href=\"walrus/module/custom/trait.CustomSection.html\" title=\"trait walrus::module::custom::CustomSection\">CustomSection</a> for <a class=\"struct\" href=\"wit_walrus/struct.WasmInterfaceTypes.html\" title=\"struct wit_walrus::WasmInterfaceTypes\">WasmInterfaceTypes</a>","synthetic":false,"types":["wit_walrus::WasmInterfaceTypes"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

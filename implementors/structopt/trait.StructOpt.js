@@ -1,0 +1,5 @@
+(function() {var implementors = {};
+implementors["run"] = [{"text":"impl <a class=\"trait\" href=\"structopt/trait.StructOpt.html\" title=\"trait structopt::StructOpt\">StructOpt</a> for <a class=\"enum\" href=\"run/enum.Cli.html\" title=\"enum run::Cli\">Cli</a>","synthetic":false,"types":["run::Cli"]}];
+implementors["structopt"] = [];
+implementors["wasm_run"] = [{"text":"impl <a class=\"trait\" href=\"structopt/trait.StructOpt.html\" title=\"trait structopt::StructOpt\">StructOpt</a> for <a class=\"struct\" href=\"wasm_run/struct.DefaultBuildArgs.html\" title=\"struct wasm_run::DefaultBuildArgs\">DefaultBuildArgs</a>","synthetic":false,"types":["wasm_run::DefaultBuildArgs"]},{"text":"impl <a class=\"trait\" href=\"structopt/trait.StructOpt.html\" title=\"trait structopt::StructOpt\">StructOpt</a> for <a class=\"struct\" href=\"wasm_run/struct.DefaultServeArgs.html\" title=\"struct wasm_run::DefaultServeArgs\">DefaultServeArgs</a>","synthetic":false,"types":["wasm_run::DefaultServeArgs"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `http_types` crate."><meta name="keywords" content="rust, rustlang, rust-lang, http_types"><title>http_types - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="https://yoshuawuyts.com/assets/http-rs/favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../http_types/index.html'><div class='logo-container'><img src='https://yoshuawuyts.com/assets/http-rs/logo-rounded.png' alt='logo'></div></a><p class="location">Crate http_types</p><div class="block version"><p>Version 2.10.0</p></div><div class="sidebar-elems"><a id="all-types" href="all.html"><p>See all http_types's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class="location"></p><div id="sidebar-vars" data-name="http_types" data-ty="mod" data-relpath="../"></div></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
+                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="">http_types</a></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/http_types/lib.rs.html#1-201" title="goto source code">[src]</a></span></h1><div class="docblock"><h1 id="common-types-for-http-operations" class="section-header"><a href="#common-types-for-http-operations">Common types for HTTP operations.</a></h1>
+<p><code>http-types</code> provides shared types for HTTP operations. It combines a performant, streaming
+interface with convenient methods for creating headers, urls, and other standard HTTP types.</p>
+<h1 id="example" class="section-header"><a href="#example">Example</a></h1>
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">http_types</span>::{<span class="ident">Url</span>, <span class="ident">Method</span>, <span class="ident">Request</span>, <span class="ident">Response</span>, <span class="ident">StatusCode</span>};
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">req</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">new</span>(<span class="ident">Method</span>::<span class="ident">Get</span>, <span class="ident">Url</span>::<span class="ident">parse</span>(<span class="string">&quot;https://example.com&quot;</span>)<span class="question-mark">?</span>);
+<span class="ident">req</span>.<span class="ident">set_body</span>(<span class="string">&quot;Hello, Nori!&quot;</span>);
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Response</span>::<span class="ident">new</span>(<span class="ident">StatusCode</span>::<span class="prelude-val">Ok</span>);
+<span class="ident">res</span>.<span class="ident">set_body</span>(<span class="string">&quot;Hello, Chashu!&quot;</span>);</pre></div>
+<h1 id="how-does-http-work" class="section-header"><a href="#how-does-http-work">How does HTTP work?</a></h1>
+<p>We couldn't possibly explain <em>all</em> of HTTP here: there are <a href="enum.Version.html">5 versions</a> of
+the protocol now, and lots of extensions. But, at its core, there are only a few concepts you
+need to know about in order to understand what this crate does.</p>
+<pre><code class="language-txt">         request
+client ----------&gt; server
+       &lt;----------
+         response
+</code></pre>
+<p>HTTP is an <a href="https://en.wikipedia.org/wiki/Remote_procedure_call">RPC protocol</a>. A client
+creates a <a href="struct.Request.html"><code>Request</code></a> containing a <a href="struct.Url.html"><code>Url</code></a>,
+<a href="struct.Method.html"><code>Method</code></a>, <a href="struct.Headers.html"><code>Headers</code></a>, and optional
+<a href="struct.Body.html"><code>Body</code></a> and sends this to a server. The server then decodes this <code>Request</code>,
+does some work, and sends back a <a href="struct.Response.html"><code>Response</code></a>.</p>
+<p>The <code>Url</code> works as a way to subdivide an IP address/domain into further addressable resources.
+The <code>Method</code> indicates what kind of operation we're trying to perform (get something, submit
+something, update something, etc.)</p>
+<pre><code class="language-txt">  Request
+|-----------------|
+| Url             |
+| Method          |
+| Headers         |
+|-----------------|
+| Body (optional) |
+|-----------------|
+</code></pre>
+<p>A <code>Response</code> consists of a <a href="enum.StatusCode.html"><code>StatusCode</code></a>,
+<a href="struct.Headers.html"><code>Headers</code></a>, and optionally a <a href="struct.Body.html"><code>Body</code></a>. The client then
+decodes the <code>Response</code>, and can then operate on it. Usually the first thing it does is check
+the status code to see if its <code>Request</code> was successful or not, and then moves on to the information contained within the headers.</p>
+<pre><code class="language-txt">     Response
+|-----------------|
+| StatusCode      |
+| Headers         |
+|-----------------|
+| Body (optional) |
+|-----------------|
+</code></pre>
+<p>Both <code>Request</code> and <code>Response</code> include <a href="struct.Headers.html"><code>Headers</code></a>. This is like key-value metadata for HTTP
+requests. It needs to be encoded in a specific way (all lowercase ASCII, only some special
+characters) so we use the <a href="headers/struct.HeaderName.html"><code>HeaderName</code></a> and
+<a href="headers/struct.HeaderValue.html"><code>HeaderValue</code></a> structs rather than strings to ensure that.
+Another interesting thing about this is that it's valid to have multiple instances of the
+same header name. This is why <code>Headers</code> allows inserting multiple values, and always returns a
+<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec</code></a> of headers for each key.</p>
+<p>When reading up on HTTP you might frequently hear a lot of jargon related to ther underlying
+protocols. But even newer HTTP versions (<code>HTTP/2</code>, <code>HTTP/3</code>) still fundamentally use the
+request/response model we've described so far.</p>
+<h1 id="the-body-type" class="section-header"><a href="#the-body-type">The Body Type</a></h1>
+<p>In HTTP, <a href="struct.Body.html"><code>Body</code></a> types are optional. The content of a <code>Body</code> is a stream of
+bytes with a specific encoding; this encoding is its <a href="struct.Mime.html"><code>Mime</code> type</a>. The <code>Mime</code> can
+be set using the <a href="struct.Request.html#method.set_content_type"><code>set_content_type</code></a> method, and
+there are many different possible <code>Mime</code> types.</p>
+<p><code>http-types</code>' <code>Body</code> struct can take anything that implements
+<a href="https://docs.rs/futures/0.3.1/futures/io/trait.AsyncBufRead.html"><code>AsyncBufRead</code></a> and stream
+it out. Depending on the version of HTTP used, the underlying bytes will be transmitted
+differently. As a rule, if you know the size of the body it's usually more efficient to
+declare it up front. But if you don't, things will still work.</p>
+</div><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
+<table><tr class="module-item"><td><a class="mod" href="auth/index.html" title="http_types::auth mod">auth</a></td><td class="docblock-short"><p>HTTP authentication and authorization.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="cache/index.html" title="http_types::cache mod">cache</a></td><td class="docblock-short"><p>HTTP caching.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="conditional/index.html" title="http_types::conditional mod">conditional</a></td><td class="docblock-short"><p>HTTP conditional headers.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="content/index.html" title="http_types::content mod">content</a></td><td class="docblock-short"><p>HTTP Content headers.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="convert/index.html" title="http_types::convert mod">convert</a></td><td class="docblock-short"><p>Traits for conversions between types.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="cookies/index.html" title="http_types::cookies mod">cookies</a></td><td class="docblock-short"><p>HTTP cookies.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="headers/index.html" title="http_types::headers mod">headers</a></td><td class="docblock-short"><p>HTTP headers.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="mime/index.html" title="http_types::mime mod">mime</a></td><td class="docblock-short"><p>IANA Media Types.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="other/index.html" title="http_types::other mod">other</a></td><td class="docblock-short"><p>Miscellaneous HTTP headers.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="proxies/index.html" title="http_types::proxies mod">proxies</a></td><td class="docblock-short"><p>Headers that are set by proxies</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="security/index.html" title="http_types::security mod">security</a></td><td class="docblock-short"><p>HTTP Security Headers.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="server/index.html" title="http_types::server mod">server</a></td><td class="docblock-short"><p>HTTP Server Context headers.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="trace/index.html" title="http_types::trace mod">trace</a></td><td class="docblock-short"><p>HTTP timings and traces.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="trailers/index.html" title="http_types::trailers mod">trailers</a></td><td class="docblock-short"><p>HTTP trailing headers.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="transfer/index.html" title="http_types::transfer mod">transfer</a></td><td class="docblock-short"><p>HTTP transfer headers.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="upgrade/index.html" title="http_types::upgrade mod">upgrade</a></td><td class="docblock-short"><p>HTTP protocol upgrades.</p>
+</td></tr><tr class="module-item"><td><a class="mod" href="url/index.html" title="http_types::url mod">url</a></td><td class="docblock-short"><p>URL records.</p>
+</td></tr></table><h2 id="macros" class="section-header"><a href="#macros">Macros</a></h2>
+<table><tr class="module-item"><td><a class="macro" href="macro.bail.html" title="http_types::bail macro">bail</a></td><td class="docblock-short"><p>Return early with an error.</p>
+</td></tr><tr class="module-item"><td><a class="macro" href="macro.ensure.html" title="http_types::ensure macro">ensure</a></td><td class="docblock-short"><p>Return early with an error if a condition is not satisfied.</p>
+</td></tr><tr class="module-item"><td><a class="macro" href="macro.ensure_eq.html" title="http_types::ensure_eq macro">ensure_eq</a></td><td class="docblock-short"><p>Return early with an error if two expressions are not equal to each other.</p>
+</td></tr><tr class="module-item"><td><a class="macro" href="macro.format_err.html" title="http_types::format_err macro">format_err</a></td><td class="docblock-short"><p>Construct an ad-hoc error from a string.</p>
+</td></tr></table><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
+<table><tr class="module-item"><td><a class="struct" href="struct.Body.html" title="http_types::Body struct">Body</a></td><td class="docblock-short"><p>A streaming HTTP body.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Cookie.html" title="http_types::Cookie struct">Cookie</a></td><td class="docblock-short"><p>Representation of an HTTP cookie.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Error.html" title="http_types::Error struct">Error</a></td><td class="docblock-short"><p>The error type for HTTP operations.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Extensions.html" title="http_types::Extensions struct">Extensions</a></td><td class="docblock-short"><p>A type to store extra data inside <code>Request</code> and <code>Response</code>.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Headers.html" title="http_types::Headers struct">Headers</a></td><td class="docblock-short"><p>A collection of HTTP Headers.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Mime.html" title="http_types::Mime struct">Mime</a></td><td class="docblock-short"><p>An IANA media type.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Request.html" title="http_types::Request struct">Request</a></td><td class="docblock-short"><p>An HTTP request.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Response.html" title="http_types::Response struct">Response</a></td><td class="docblock-short"><p>An HTTP response.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Trailers.html" title="http_types::Trailers struct">Trailers</a></td><td class="docblock-short"><p>A collection of trailing HTTP headers.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Url.html" title="http_types::Url struct">Url</a></td><td class="docblock-short"><p>A parsed URL record.</p>
+</td></tr></table><h2 id="enums" class="section-header"><a href="#enums">Enums</a></h2>
+<table><tr class="module-item"><td><a class="enum" href="enum.Method.html" title="http_types::Method enum">Method</a></td><td class="docblock-short"><p>HTTP request methods.</p>
+</td></tr><tr class="module-item"><td><a class="enum" href="enum.StatusCode.html" title="http_types::StatusCode enum">StatusCode</a></td><td class="docblock-short"><p>HTTP response status codes.</p>
+</td></tr><tr class="module-item"><td><a class="enum" href="enum.Version.html" title="http_types::Version enum">Version</a></td><td class="docblock-short"><p>The version of the HTTP protocol in use.</p>
+</td></tr></table><h2 id="traits" class="section-header"><a href="#traits">Traits</a></h2>
+<table><tr class="module-item"><td><a class="trait" href="trait.Status.html" title="http_types::Status trait">Status</a></td><td class="docblock-short"><p>Provides the <code>status</code> method for <code>Result</code> and <code>Option</code>.</p>
+</td></tr></table><h2 id="types" class="section-header"><a href="#types">Type Definitions</a></h2>
+<table><tr class="module-item"><td><a class="type" href="type.Result.html" title="http_types::Result type">Result</a></td><td class="docblock-short"><p>A specialized <code>Result</code> type for HTTP operations.</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="http_types"></div>
+    <script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

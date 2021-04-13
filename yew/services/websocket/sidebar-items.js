@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["WebSocketError","An error encountered by a WebSocket."],["WebSocketStatus","The status of a WebSocket connection. Used for status notifications."]],"struct":[["WebSocketService","A WebSocket service attached to a user context."],["WebSocketTask","A handle to control the WebSocket connection. Implements `Task` and could be canceled."]]});

@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `wasm_run` crate."><meta name="keywords" content="rust, rustlang, rust-lang, wasm_run"><title>wasm_run - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../wasm_run/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><p class="location">Crate wasm_run</p><div class="block version"><p>Version 0.8.1</p></div><div class="sidebar-elems"><a id="all-types" href="all.html"><p>See all wasm_run's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div><p class="location"></p><div id="sidebar-vars" data-name="wasm_run" data-ty="mod" data-relpath="../"></div></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
+                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="">wasm_run</a></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/wasm_run/lib.rs.html#1-923" title="goto source code">[src]</a></span></h1><div class="docblock"><p><img src="https://github.com/IMI-eRnD-Be/wasm-run/workflows/main/badge.svg" alt="Rust" />
+<a href="https://crates.io/crates/wasm-run"><img src="https://img.shields.io/crates/v/wasm-run.svg" alt="Latest Version" /></a>
+<a href="https://docs.rs/wasm-run"><img src="https://docs.rs/wasm-run/badge.svg" alt="Docs.rs" /></a>
+<a href="https://github.com/IMI-eRnD-Be/wasm-run"><img src="https://tokei.rs/b1/github/IMI-eRnD-Be/wasm-run" alt="LOC" /></a>
+<a href="https://deps.rs/repo/github/IMI-eRnD-Be/wasm-run"><img src="https://deps.rs/repo/github/IMI-eRnD-Be/wasm-run/status.svg" alt="Dependency Status" /></a>
+<img src="https://img.shields.io/crates/l/wasm-run" alt="License" /></p>
+<h1 id="synopsis" class="section-header"><a href="#synopsis">Synopsis</a></h1>
+<p>Build tool that replaces <code>cargo run</code> to build WASM projects. Just like webpack, <code>wasm-run</code>
+offers a great deal of customization.</p>
+<p>To build your WASM project you normally need an external tool like <code>wasm-bindgen</code>, <code>wasm-pack</code>
+or <code>cargo-wasm</code>. <code>wasm-run</code> takes a different approach: it's a library that you install as a
+dependency to a binary of your project. Because of that you don't need any external tool, the
+tooling is built as part of your dependences.</p>
+<p>To build your project for production you can use the command <code>cargo run -- build</code> and to run a
+development server that reloads automatically when the sources change you can use <code>cargo run -- serve</code>.</p>
+<p><strong>Please note that there is a space between <code>--</code> and <code>build</code> and between <code>--</code> and <code>serve</code>!</strong></p>
+<p>One of the main advantage of this library is that it provides greater customization: you can
+set a few hooks during the build process in order to customize the build directory or use a
+template to generate your index.html, download some CSS, ... you name it. I personally use it
+to reduce the amount of files by bundling the CSS and the JS into the <code>index.html</code> so I had
+only two files (<code>index.html</code>, <code>app_bg.wasm</code>).</p>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<p>There are two basic examples to help you get started quickly:</p>
+<ul>
+<li>a <a href="https://github.com/IMI-eRnD-Be/wasm-run/tree/main/examples/basic">&quot;basic&quot;</a> example for a
+frontend only app that rebuilds the app when a file change is detected;</li>
+<li>a <a href="https://github.com/IMI-eRnD-Be/wasm-run/tree/main/examples/backend-and-frontend">&quot;backend-and-frontend&quot;</a>
+example using the web framework Rocket (backend) which uses Rocket itself to serve the file
+during the development (any file change is also detected and it rebuilds and restart
+automatically).</li>
+</ul>
+<h1 id="usage" class="section-header"><a href="#usage">Usage</a></h1>
+<p>All the details about the hooks can be find on the macro <a href="../wasm_run/attr.main.html" title="main"><code>main</code></a>.</p>
+<h1 id="additional-information" class="section-header"><a href="#additional-information">Additional Information</a></h1>
+<ul>
+<li>You can use this library to build examples in the <code>examples/</code> directory of your project.
+<code>cargo run --example your_example -- serve</code>. But you will need to specify the name of the
+WASM crate in your project and it must be present in the workspace. Please check the
+<a href="https://github.com/IMI-eRnD-Be/wasm-run/blob/main/examples/example.rs">&quot;example&quot;</a> example.</li>
+<li>If you want to use your own backend you will need to disable the <code>serve</code> feature by
+disabling the default features. You can use the <code>full-restart</code> feature to force the backend
+to also be recompiled when a file changes (otherwise only the frontend is re-compiled). You
+will also need to specify <code>run_server</code> to the macro arguments to run your backend.</li>
+<li>You can add commands to the CLI by adding variants in the <code>enum</code>.</li>
+<li>You can add parameters to the <code>Build</code> and <code>Serve</code> commands by overriding them. Please check
+the documentation on the macro <code>main</code>.</li>
+<li>If you run <code>cargo run -- serve --profiling</code>, the WASM will be optimized.</li>
+</ul>
+<h1 id="features" class="section-header"><a href="#features">Features</a></h1>
+<ul>
+<li><code>prebuilt-wasm-opt</code>: if you disable the default features and enable this feature, a binary
+of wasm-opt will be downloaded from GitHub and used to optimize the WASM. By default,
+wasm-opt is compiled among the dependencies (<code>binaryen</code>). This is useful if you run into
+troubles for building <code>binaryen-sys</code>. (<code>binaryen</code> cannot be built on Netlify at the
+moment.)</li>
+<li><code>sass</code>: support for SASS and SCSS. All SASS and SCSS files found in the directories
+<code>styles/</code>, <code>assets/</code>, <code>sass/</code> and <code>css/</code> will be automatically transpiled to CSS and placed
+in the build directory. This can be configured by overriding:
+[<code>BuildArgs::build_sass_from_dir</code>], [<code>BuildArgs::sass_lookup_directories</code>],
+[<code>BuildArgs::sass_options</code>] or completely overriden in the <a href="../wasm_run/struct.Hooks.html#structfield.post_build" title="Hooks::post_build"><code>Hooks::post_build</code></a> hook.
+<code>sass-rs</code> is re-exported in the prelude of <code>wasm-run</code> for this purpose.</li>
+<li><code>full-restart</code>: when this feature is active, the command is entirely restarted when changes
+are detected when serving files for development (<code>cargo run -- serve</code>). This is useful with
+custom <code>serve</code> command that uses a custom backend and if you need to detect changes in the
+backend code itself.</li>
+</ul>
+</div><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
+<table><tr class="module-item"><td><a class="mod" href="prelude/index.html" title="wasm_run::prelude mod">prelude</a></td><td class="docblock-short"><p>The wasm-run Prelude</p>
+</td></tr></table><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
+<table><tr class="module-item"><td><a class="struct" href="struct.CargoChild.html" title="wasm_run::CargoChild struct">CargoChild</a></td><td class="docblock-short"><p>A cargo child process.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.DefaultBuildArgs.html" title="wasm_run::DefaultBuildArgs struct">DefaultBuildArgs</a></td><td class="docblock-short"><p>Build arguments.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.DefaultServeArgs.html" title="wasm_run::DefaultServeArgs struct">DefaultServeArgs</a></td><td class="docblock-short"><p>Serve arguments.</p>
+</td></tr><tr class="module-item"><td><a class="struct" href="struct.Hooks.html" title="wasm_run::Hooks struct">Hooks</a></td><td class="docblock-short"><p>Hooks.</p>
+</td></tr></table><h2 id="enums" class="section-header"><a href="#enums">Enums</a></h2>
+<table><tr class="module-item"><td><a class="enum" href="enum.BuildProfile.html" title="wasm_run::BuildProfile enum">BuildProfile</a></td><td class="docblock-short"><p>A build profile for the WASM.</p>
+</td></tr></table><h2 id="traits" class="section-header"><a href="#traits">Traits</a></h2>
+<table><tr class="module-item"><td><a class="trait" href="trait.BuildArgs.html" title="wasm_run::BuildArgs trait">BuildArgs</a></td><td class="docblock-short"><p>A trait that allows overriding the <code>build</code> command.</p>
+</td></tr><tr class="module-item"><td><a class="trait" href="trait.PackageExt.html" title="wasm_run::PackageExt trait">PackageExt</a></td><td class="docblock-short"><p>An extension for <a href="../wasm_run/prelude/struct.Package.html" title="Package"><code>Package</code></a> and for <a href="../wasm_run/prelude/struct.Metadata.html" title="Metadata"><code>Metadata</code></a> to run a cargo command a bit more easily.
+Ideal for scripting.</p>
+</td></tr><tr class="module-item"><td><a class="trait" href="trait.ServeArgs.html" title="wasm_run::ServeArgs trait">ServeArgs</a></td><td class="docblock-short"><p>A trait that allows overriding the <code>serve</code> command.</p>
+</td></tr></table><h2 id="attributes" class="section-header"><a href="#attributes">Attribute Macros</a></h2>
+<table><tr class="module-item"><td><a class="attr" href="attr.main.html" title="wasm_run::main attr">main</a></td><td class="docblock-short"><p>Makes an entrypoint to your binary (not WASM).</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="wasm_run"></div>
+    <script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>
